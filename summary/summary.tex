@@ -1,0 +1,118 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{luacode}
+\usepackage{color}
+
+\setmainfont{Times New Roman}
+\geometry{margin=1.5cm}
+\linespread{1.46}
+\definecolor{metroorange}{RGB}{185, 98, 30}
+
+\title{{\color{metroorange}Executive Summary} \\
+
+Implementation of a Forensic Analysis System for Malicious Network Traffic}
+\author{{\color{metroorange}Nicolas Kyejo}}
+\date{\directlua{metropoliadate()}}
+\setlength{\parindent}{0pt} % Remove paragraph indentation
+\setlength{\parskip}{16.5pt} %one empty line to separate paragraph
+
+\begin{luacode}
+function metropoliadate()
+    local today = os.date("!\%d \%B \%Y")
+    tex.sprint(today)
+end
+\end{luacode}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+
+    \newpage
+    \setcounter{page}{1}
+
+
+    \section{Background}\label{sec:background}
+
+    The main goal of the final year project and thesis was to examine and create a forensic system for detecting malicious network traffic.
+    The justification for such a project was to see if it could be used reliably and also be a low-cost security solution.
+    Some examples of network forensic systems include Intrusion Prevention System (IPS), Intrusion Detection System (IDS) and Security
+    Information and Event Management (SIEM).
+    These tools are generally expensive; a cursory search on the internet shows that the average price of an intrusion detection system is over 5000 EUR for hardware-based solutions and over 1000 EUR for software-based solutions.
+    Therefore, a supporting goal was to see if a similar system could be built with freely available tools and open data.
+
+    The implemented forensic system closely resembles an IDS in functionality since it only predicts (detects) malicious network traffic; it does not prevent malicious traffic from reaching the target network.
+    The system was implemented with the help machine learning methods to classify network traffic as malicious or benign.
+
+
+    \section{Methodology}\label{sec:methodology}
+
+    Initially, the forensic system solution was meant to not use any machine learning methods.
+    The initial planned solution was to use programming constructs to decide if a piece of network traffic was malicious or not---this would be similar to what `Expert Systems' do in practice.
+    However, after some research, it was found that machine learning methods could be used to create a more robust solution in less time.
+
+    The first step was to find a suitable dataset to train the machine learning models;
+    through manual searching, the \textit{CICIDS2017} dataset was found among various existing IDS datasets.
+    The main reason for choosing this dataset was that it was relatively small compared to other datasets encountered.
+    Additionally, it was also well documented and had software to extract features from raw packet capture data (PCAP).
+
+    The next step was to find suitable supervised machine learning methods commonly used in classification tasks.
+    Among the numerous machine learning methods existing (variants also), four were chosen for the implementation: \textit{K-Nearest Neighbors} (KNN), \textit{Random Forest}, \textit{Logistic Regression}, and \textit{Multi-Layer Perceptron} (MLP).
+
+    The training and evaluation of the machine learning was done using the \textit{scikit-learn} library in Python.
+    The process consisted of loading the dataset, splitting it into training and testing sets, training the models (for each algorithm), and noting the test score accuracy.
+    Furthermore, the hyperparameters of the algorithms were tuned manually, and the best parameters were noted.
+    For the hyperparameters chosen, the models were trained again with cross-validation to ensure that the test score results were not overfitting on the training data.
+    The models trained were then saved to disk using the \textit{skops} library in order to be used later for the final evaluation.
+
+
+    Data for the final evaluation was captured from a virtualized environment created using \textit{Vagrant} and \textit{VirtualBox}.
+    The environment consisted of three Kali Linux guest machines: \textit{defender}, \textit{attacker}, and \textit{target}.
+    All three machines were in the same network to make implementation easier in regard to capturing network traffic.
+    The capture was done with \textit{tcpdump} and the resulting \textit{PCAP} files were converted (feature extraction) to \textit{CSV} files with the help of \textit{cicflowmeter}.
+    The benign captured network traffic consisted of HTTP web browsing, FTP, SSH, telnet, and DNS query traffic.
+    On the other hand, the malicious traffic consisted of denial-of-service (ICMP ping flood), brute force login, SQL injection, command injection, and XSS attacks.
+
+    The final implementation step was to develop a user interface for predicting whether a piece of network traffic was malicious or not.
+    This step involved giving a PCAP file as input and outputting a prediction of either `Benign' or `Malicious'.
+    To facilitate this step, a GUI was created using \textit{tkinter}, a Python wrapper to the Tk GUI toolkit.
+    For multiple predictions, a simple script was created to automate the process of predicting multiple PCAP files.
+
+
+    \section{Findings}\label{sec:findings}
+
+    As a precursor to the final prediction on the captured network traffic, the performance of the models was first compared with each other.
+    The comparisons were done using learning curves, confusion matrices, mean F1-scores, and time taken to train the models.
+    The Random Forest model performed the best even though it took the longest to train;
+   the KNN model took the shortest time to train while performing the worst in terms of accuracy.
+    Overall, the results showed that the models performed well in terms of accuracy and training time.
+
+    The final prediction on the captured network traffic was done using all four models.
+    The prediction process consisted of predicting each captured traffic whose label was known and the output recorded for each model's prediction.
+    The final results showed that the KNN model performed the best in terms of accuracy while the Random Forest model performed the worst;
+    the runner-ups were the MLP and Logistic Regression models.
+    The only model with a false-positive prediction was the MLP model, which predicted web browsing benign traffic as malicious.
+    The Random Forest model was not able to detect any of the attacks in the captured traffic.
+    This could be due to the model overfitting to the training data.
+
+    \clearpage
+
+    One of the attacks---the command injection attack---was detected by all models except the Random Forest model despite the attack not being in the \textit{CICIDS2017} dataset.
+    This result showed that the models were able to generalize well to a new attack, which is one of the advantages of using machine learning methods.
+
+
+    \section{Conclusion}\label{sec:conclusion}
+
+    In the context of the thesis project aims, it was able to achieve them using open-source tools and open data;
+    the model training was done on a mid-range laptop hardware released in 2020.
+    The trained models using supervised machine learning methods proved effective in detecting malicious traffic.
+
+    However, some limitations with the project were noted, such as the limited number of attack type scenarios examined and the lack of real-world network testing for the trained models.
+    One recommendation for further research is the development of open datasets for creating network forensic solutions through crowdsourcing network traffic data and logs;
+    Privacy concerns for such data could be addressed with anonymization measures.
+
+\end{document}
+

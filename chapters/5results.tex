@@ -1,0 +1,154 @@
+\clearpage%if the chapter heading starts close to bottom of the page, force a line break and remove the vertical vspace
+\vspace{21.5pt}
+
+
+\chapter{Results}\label{ch:results}
+
+This chapter provides an evaluation of the models in terms of performance and the prediction results obtained.
+The first section, Model Performance, describes the accuracy of the models and their ability to generalize to unseen data.
+It compares and analyzes the respective performance on the CICIDS2017 dataset.
+The second section, Prediction Results, presents the results of applying the models to data that was gathered from the implemented \gls{lan}.
+It provides an analysis of the predictions made by the models, including the accuracy and reliability of the results.
+Overall, this chapter provides insights into the performance and effectiveness of the models trained.
+
+Recall, precision, and F1-score are evaluation metrics commonly used in binary classification tasks.
+Recall measures the proportion of actual positive samples that are correctly identified as positive by the model
+while
+precision measures the proportion of predicted positive samples that are actually positive.
+F1-score is the harmonic mean of recall and precision, which takes both metrics into account and provides an evaluation of a model's performance.
+The F1-score ranges from zero to one, where one represents perfect precision and recall, and zero represents the worst performance.
+The formula~\ref{eq:f1-equation} shows the calculation of the F1-score.
+
+\begin{equation}
+    \text{F1} = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}\label{eq:f1-equation}
+\end{equation}
+
+where precision and recall are:
+
+\begin{equation}
+    \text{precision} = \frac{TP}{TP+FP}\label{eq:f1-precision-equation}
+\end{equation}
+
+\begin{equation}
+    \text{recall} = \frac{TP}{TP+FN}\label{eq:f1-recall-equation}
+\end{equation}
+
+In the formulas~\ref{eq:f1-precision-equation} and~\ref{eq:f1-recall-equation}, $TP$ represents the number of true positives,
+$FP$ represents the number of \gls{false-positive}s, and $FN$ represents the number of \gls{false-negative}s.
+True positive in the implemented system represents the case where the network traffic is malicious.
+In the \emph{scikit-learn} library, scores are calculated by passing the score metric that is desired and it will be calculated automatically.
+These metrics are essential in evaluating the performance of a binary classification model and can help identify the strengths and weaknesses of the model in distinguishing between the two classes.
+
+
+\section{Model Performance}\label{sec:model-performance}
+
+The evaluation of a model's base performance was calculated on the basis of the dataset, whereas the collected network traffic was used in the final prediction.
+For each model, different evaluations were done and recorded.
+In this section, these evaluations are compared with each other.
+
+One of the most important predictors of a model's performance is the learning curve.
+A learning curve is a graphical representation that illustrates the progress of a model's learning by plotting its accuracy on the \gls{train-data} and
+\gls{test-data} against the number of training samples.
+The graph in figure~\ref{fig:learning-curve} shows the learning curve of the chosen machine learning models which depicts this relationship.
+
+\begin{figure}[H]
+    \centering
+    \AltText{Four plots in vertical orientation showing a line plot depicting how accuracy is affected by number of samples}{\includesvg[width=\textwidth]{learning-curve-more-data-points}}
+    \caption{Learning curve of the models on the dataset}
+    \label{fig:learning-curve}
+\end{figure}
+
+As shown in figure~\ref{fig:learning-curve}, the models have different curves signifying that each model improved at different rates when more training samples were added.
+The training score evaluates how the models performed on the \gls{train-data}, in other words, how well it was able to generalize the relationship between the input and output when the answers were known.
+All models improved with the addition of more samples in the training set up to a point---this point was somewhere at about 36\% of the whole dataset samples.
+Also of note is how Random Forest had a plateau while the other models except \gls{knn} slightly degraded in test score accuracy after this point.
+A slightly more numerical comparison can be seen in figure~\ref{fig:conf-matrix}.
+
+
+\begin{figure}[ht]
+    \centering
+    \AltText{A two by two diagram showing a box with numbers inside. These numbers signify the comparison between the predictions and the actual values}{\includesvg[width=\textwidth]{conf-matrix}}
+    \caption{Confusion matrix of the models}
+    \label{fig:conf-matrix}
+\end{figure}
+
+The figure~\ref{fig:conf-matrix} shows the confusion matrix diagram.
+The number of $TP$, $FP$, $FN$, and $TN$ can be gleamed from the matrix.
+It can be seen that the Random Forest model had the highest true predictions and the Logistic Regression model the highest missed predictions.
+A more intuitive comparison can be observed in figure~\ref{fig:score-comparison} showing the mean F1-score of five cross-validated scores.
+
+\begin{figure}[ht]
+    \centering
+    \AltText{A horizontal bar plot showing each models score in comparison}{\includesvg[width=\textwidth]{model_test_score_comparison}}
+    \caption{Mean F1-score of models}
+    \label{fig:score-comparison}
+\end{figure}
+
+
+The information learned from figure~\ref{fig:score-comparison} is similar to figure~\ref{fig:conf-matrix}.
+It can be seen clearly that Random Forest had the highest score and \gls{knn} the lowest.
+An explanation of why \gls{knn} score is the lowest is that the F1-score does not take into account the number of $TN$.
+
+Another useful comparison from the training process was how the models performed in terms of time taken to train;
+this information can affect resource planning optimization when considered together with model accuracy.
+This comparison can be seen in figure~\ref{fig:train-time}.
+
+\begin{figure}[ht]
+    \centering
+    \AltText{A vertical bar plot where each bar represents each model's train time}{\includesvg[width=\textwidth]{model_training_time_comparison}}
+    \caption{Model training time on full dataset}
+    \label{fig:train-time}
+\end{figure}
+
+The training time shown in figure~\ref{fig:train-time} reveals that Random Forest took the longest time to train while
+\gls{knn} the shortest.
+In regards to \gls{knn}, the result is not surprising since the model's computation only takes place during prediction of new data.
+The training process results show that all the models used can be justified as good models when their training time and F1-scores are examined together.
+
+
+\section{Prediction Results}\label{sec:prediction-results}
+
+In this section, the prediction results obtained from the trained models on the captured network data (\gls{pcap}) are discussed.
+The prediction results are analyzed to evaluate the performance of each model in terms of precision, recall, and F1-score.
+By comparing the results of different models, the most effective model for predicting network traffic can be identified.
+Additionally, the potential implications of the prediction results are briefly addressed.
+Table~\ref{tab:table-final-results} shows the predictions of the captured network traffic in the \gls{lan}.
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Prediction results for different models on captured network data}
+    \label{tab:table-final-results}
+    \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+        \textbf{\gls{pcap} type}      & \textbf{Label} & \textbf{KNN} & \textbf{MLP} & \textbf{RF} & \textbf{LR} \\ \hline
+        Web browsing on target        & Benign         & Benign       & Malicious    & Benign      & Benign                       \\ \hline
+        Telnet connection             & Benign         & Benign       & Benign       & Benign      & Benign                       \\ \hline
+        \gls{ftp} connection          & Benign         & Benign       & Benign       & Benign      & Benign                       \\ \hline
+        \gls{ssh} connection          & Benign         & Benign       & Benign       & Benign      & Benign                       \\ \hline
+        \gls{dns} query               & Benign         & Benign       & Benign       & Benign      & Benign                       \\ \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Brute force login             & Malicious      & Malicious    & Malicious    & Benign      & Benign                       \\ \hline
+        \gls{DoS} by \gls{icmp} flood & Malicious      & Malicious    & Benign       & Benign      & Malicious                    \\ \hline
+        \gls{sql} injection           & Malicious      & Malicious    & Malicious    & Benign      & Malicious                    \\ \hline
+        Command injection             & Malicious      & Malicious    & Malicious    & Benign      & Malicious                    \\ \hline
+        \gls{xss}                     & Malicious      & Benign       & Malicious    & Benign      & Benign                       \\ \hline
+    \end{tabular}
+\end{table}
+
+From the data in table~\ref{tab:table-final-results}, the results suggest that \gls{knn} is the most accurate model.
+The F1-scores (see formula~\ref{eq:f1-equation}) of \gls{knn}, \gls{mlp}, Random Forest, and Logistic Regression are 0.89, 0.80, 0.00, and 0.75 respectively.
+The expectation from the final model performance is somewhat different---especially in regards to Random Forest and \gls{knn}.
+One explanation could be that Random Forest was \gls{over-fitting} on the dataset and \gls{knn} model did not.
+\gls{knn} as the most accurate model in the final results predicted everything correctly except the \gls{xss} attack;
+\gls{mlp} \gls{ann} as the second most accurate model incorrectly flagged \gls{http} web browsing traffic as malicious and missed the \gls{DoS} attack.
+The Logistic Regression model as the third most accurate model missed the brute force and \gls{xss} attacks.
+
+\clearpage
+According to the dataset publication, command injection attack was not part of the dataset.
+Despite this, the models were able to correctly flag it as malicious (except Random Forest) which can be evidence of the power of \gls{aids} to detect new or unseen attacks.
+
+However, it should be noted that to calculate a meaningful F1-score, more observation data is needed with varying attack and benign samples.
+Therefore, the final results are only a suggestive result rather than a conclusive result.
+In the end, a combination of \gls{aids} to detect \gls{zero-day} attacks and \gls{sids} to detect known attacks may be the most effective method in
+forensics of malicious network traffic.

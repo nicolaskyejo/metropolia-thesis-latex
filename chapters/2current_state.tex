@@ -1,0 +1,28 @@
+\clearpage%if the chapter heading starts close to bottom of the page, force a line break and remove the vertical vspace
+%\vspace{21.5pt}
+
+\chapter{Current State Analysis}\label{ch:current-state-analysis}
+
+The field of IT is very important to the modern economic infrastructure since it helps facilitate nearly all modern
+commerce, logistics, business, research, healthcare, and more.
+Its crucial role has made it a highly valuable target for cybercriminals hoping to gain money and influence.
+As stated previously, having a way to analyze and demonstrate with a degree of certainty that a cyberattack took place is one of the goals in forensic analysis of network traffic.
+
+In the current technology tools offering, there are some tools that can determine whether a cyberattack took place.
+These tools are usually classed as \gls{siem}, \gls{ips}, and \gls{ids}.
+
+\gls{siem} tools are usually mostly employed as a `Software as a service' (SaaS) solution in a Cloud platform to
+solve security and compliance requirements as required by specific industries.
+Examples of such compliance standards include the Sarbanes-Oxley Act (SOX), General Data Protection Regulation (GDPR), and others.
+\gls{siem}s are good at determining and alerting the presence of cyberattacks;
+however, they are a fairly expensive investment for small organizations or individuals with smaller needs in terms of data traffic volume and functionality.
+
+On the other hand, \gls{ips}es and \gls{ids}es are less expensive in comparison to \gls{siem} solutions.
+They are employed as either an on-premise or a Cloud solution in the form of hardware or software to detect cyberattacks,
+and in the case of \gls{ips} also prevent detected cyberattacks.
+Hardware-based \gls{ips}es and \gls{ids}es are generally faster and more expensive compared to software-based counterparts.
+
+The aforementioned tools have something in common—they require a non-trivial investment in money and resources.
+Therefore, this thesis will examine whether building a similar system is practical and achievable in terms of effort and cost.
+It will do this by evaluating a software-based forensic system that was built by making use of available open datasets to train machine learning models to identify whether a particular piece of network traffic is malicious or benign.
+The implemented system is not a drop-in replacement for the mentioned tools, rather it is a proof of concept of building an `\gls{ids}-like' functionality with only open data and freely available tools.

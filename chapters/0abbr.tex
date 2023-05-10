@@ -3,37 +3,95 @@
 
 % Acronyms, abbreviations, etc.
 
-\newacronym{html}{HTML}{HyperText Markup Language}
 \newacronym{sql}{SQL}{Structured Query Language}
-\newacronym{io}{I/O}{Input/Output}
-\newacronym{ram}{RAM}{Random Access Memory}
-\newacronym{php}{PHP}{Hypertext Preprocessor}
-\newacronym{wysiwym}{WYSIWYM}{What You See Is What You Mean}
-\newacronym{isbn}{ISBN}{International Standard Book Number}
-\newacronym{url}{URL}{Uniform Resource Locator}
-\newacronym{doi}{DOI}{Digital Object Identifier}
+\newacronym{DoS}{DoS}{Denial-of-Service}
+\newacronym{DDoS}{DDoS}{Distributed Denial-of-Service}
+\newacronym{siem}{SIEM}{Security Information and Event Management}
+\newacronym{ids}{IDS}{Intrusion Detection System}
+\newacronym{sids}{SIDS}{Signature-based Intrusion Detection System}
+\newacronym{aids}{AIDS}{Anomaly-based Intrusion Detection System}
+\newacronym{ips}{IPS}{Intrusion Prevention System}
+\newacronym{icmp}{ICMP}{Internet Control Message Protocol}
+\newacronym{xss}{XSS}{Cross-Site Scripting}
+\newacronym{dom}{DOM}{Document Object Model}
+\newacronym{lan}{LAN}{Local Area Network}
+\newacronym{knn}{KNN}{K-nearest Neighbors}
+\newacronym{mlp}{MLP}{Multi-Layer Perceptron}
+\newacronym{ann}{ANN}{Artificial Neural Network}
+\newacronym{dvwa}{DVWA}{Damn Vulnerable Web Application}
+\newacronym{pcap}{PCAP}{Packet Capture}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym{ssh}{SSH}{Secure Shell}
+\newacronym{dns}{DNS}{Domain Name System}
+\newacronym{ftp}{FTP}{File Transfer Protocol}
+\newacronym{http}{HTTP}{Hypertext Transfer Protocol}
+
+
 
 % Glossary entries
 
-\newglossaryentry{part_key}{
-	name={partition key},
-	description={a column or set of columns from the same table whose consolidated value decide the partition for a given data}
-}
-\newglossaryentry{thesis}{
-	name=thesis,
-	description={a written essay one submitted for a university degree},
-	plural=theses
-}
-\newglossaryentry{latex}
-{
-	name=\LaTeX{},
-	description={Is a mark up language specially suited for scientific documents}
+\newglossaryentry{zero-day}{
+    name={zero-day},
+    description={a type of vulnerability or flaw in software, hardware, or firmware known only to the attacker and not to the developers of the affected system, making it difficult to defend against}
 }
 
-\newglossaryentry{maths}
-{
-	name=mathematics,
-	description={Mathematics is what mathematicians do}
+\newglossaryentry{cv}{
+    name={cross-validation},
+    description={a method to test the accuracy of a machine learning model by splitting the dataset into smaller subsets, training the model on some subsets and testing it on the others. This process is repeated multiple times to ensure the model's performance is not overfitting and to estimate its generalization performance on new data}
 }
 
+\newglossaryentry{lr}{
+    name={Linear Regression},
+    description={a statistical method used to model the relationship between two variables by fitting a straight line through the data points to minimize the sum of squared residuals, with the goal of predicting the value of one variable (dependent variable) based on the value of another variable (independent variable)}
+}
 
+\newglossaryentry{train-data}{
+name={train data},
+description={a labeled dataset used to train a machine learning model}
+}
+
+\newglossaryentry{test-data}{
+name={test data},
+description={a separate and independent dataset that is used to evaluate the performance and generalization capability of a trained machine learning model}
+}
+
+\newglossaryentry{decision-threshold}{
+name={decision threshold},
+description={a probability value that is used to classify observations into one of two (or more) classes. If the predicted probability of an observation belonging to one class is above the decision threshold, it is classified as belonging to that class; otherwise, it is classified as belonging to the other class}
+}
+
+\newglossaryentry{ensemble-method}{
+name={ensemble method},
+description={a technique that combines the predictions of multiple learning algorithms to improve prediction}
+}
+
+\newglossaryentry{over-fitting}{
+name={overfitting},
+description={a situation where a trained model performs very well on the training data but fails to generalize to new, unseen data}
+}
+
+\newglossaryentry{false-negative}{
+name={false-negative},
+description={a missed positive prediction}
+}
+
+\newglossaryentry{false-positive}{
+name={false-positive},
+description={an incorrect classification of a negative prediction as positive, that is to say, noise}
+}
+
+\newglossaryentry{pr-mode}{
+name={promiscuous mode},
+description={a feature in packet capture where a network interface card captures all packets on a network, including those not addressed to it}
+}
+
+\newglossaryentry{feat-extr}{
+name={feature extraction},
+description={a process of selecting and transforming raw data into a set of meaningful features that can be used for model training and prediction}
+}
+
+\newglossaryentry{hyper-param}{
+name={hyperparameters},
+description={parameters set before training in a machine learning model and are not learned from the data.
+They control the behavior of the learning algorithm and can significantly impact the performance of the trained model}
+}

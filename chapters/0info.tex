@@ -2,17 +2,17 @@
 
 % Global information (title of your thesis, your name, degree programme, major, etc.)
 
-\def\bilingual{yes}%For Finnish students, you must have 2 abstracts, one in English and one in your native language (Finnish or Swedish), so "yes", your thesis is bilingual.
-%\def\bilingual{no}%For international student writing in English, only one language and one abstract.
+%\def\bilingual{yes}%For Finnish students, you must have 2 abstracts, one in English and one in your native language (Finnish or Swedish), so "yes", your thesis is bilingual.
+\def\bilingual{yes}%For international student writing in English, only one language and one abstract.
 
-\def\thesislang{finnish} %change this depending on the main language of the thesis.
-%\def\thesislang{english} % "english" is the only other supported language currently. If someone has the swedish, please contribute!
+%\def\thesislang{finnish} %change this depending on the main language of the thesis.
+\def\thesislang{english} % "english" is the only other supported language currently. If someone has the swedish, please contribute!
 
-\def\secondlang{english} %if the main language is Finnish (or Swedish), you must have 2 abstracts (one in Finnish (or Swedish) and one in English)
+%\def\secondlang{english} %if the main language is Finnish (or Swedish), you must have 2 abstracts (one in Finnish (or Swedish) and one in English)
 %\def\secondlang{finnish}
 %If the main language is English and that you are native Finnish (or Swedish) speaker, you must have also abstract in your native language on top of the English one.
 
-\author{Nimi/Name} %your first name and last name
+\author{Nicolas Kyejo}
 
 %\def\alaotsikko{Alaotsikko/Subtitle} %DISABLED, seems not to be an option with the 2018 template. If you really need it, uncomment and modify style/title.tex accordingly.
 
@@ -29,40 +29,42 @@
 %by-nc-sa (Attribution-NonCommercial-ShareAlike)
 %by-nc-nd (Attribution-NonCommercial-NoDerivs)
 %Note that theseus do not accept dedication to public domain CC0
-\def\thesiscopy{all}
+\def\thesiscopy{by-sa}
 
 %Finnish section, for title/abstract
-\def\otsikko{Opinnäytetyön otsikko}
-\def\tutkinto{Tutkinto (esim. Insinööri (AMK))} % change to your needs, e.g. "YAMK", etc.
-\def\kohjelma{Koulutusohjelma (esim. Tieto\textendash ja viestintätekniikka)}
-\def\suuntautumis{Ammatillinen pääaine (esim. Mobile Solutions)}
-\def\thesisfi{Insinöörityö}%was Opinnäytetyö
+\def\otsikko{Haitallisen verkkoliikenteen rikosteknisen analyysijärjestelmän toteuttaminen}
+\def\tutkinto{Insinööri (AMK)}
+\def\kohjelma{Tieto- ja viestintätekniikka}
+\def\suuntautumis{IoT ja Pilvipalvelut}
+\def\thesisfi{Insinöörityö}
 \def\ohjaajat{
-Titteli Etunimi Sukunimi\newline
-Titteli Etunimi Sukunimi
+Janne Salonen, Osaamisaluepäällikkö, ICT ja tuotantotalous
 }
 \def\tiivistelma{
-Tämä on tiivistelmän ensimmäinen kappale. Tiivistelmän kappaleet loppuvat komentoon newline, jotta saadaan yksi tyhjä rivi aikaiseksi. \newline
+    Insinöörityön päätavoitteena oli koneoppimismallien luominen pahantahtoisen verkkoliikenteen havaitsemiseksi. Nämä mallit luotiin käyttäen `K-nearest Neighbors'-, `Logistic Regression'-, `Random Forest'-, ja `Multi-Layer Perceptron' -algoritmeja. Mallien koulutuksessa käytetty datasetti oli CICIDS2017-datasetti. Lopullisessa arviointivaiheessa virtuaalisessa lähiverkossa kaapattua liikennettä käytettiin mallien arvioimiseen. \newline
 
-Tämä on tiivistlemän toinen kappale.
+    Mallien suorituskyky ja ennusteet viittasivat siihen, että niitä voitaisiin käyttää tehokkaasti verkkorikostekniikassa kyberhyökkäysten tunnistamiseksi. Insinöörityö osoitti, että tällainen toteutettu järjestelmä oli erittäin riippuvainen avoimien datasettien saatavuudesta, joten vaiva näyttää olevan perusteltua, jos laadukkaita avoimia datasetteja on saatavilla ja käytössä.
+
 }
-\def\avainsanat{avainsana, avainsana}
-\def\aihe{Lyhyt kuvaus opinnäytetyöstä. Max 255 merkkiä.}%for the pdf metadata/properties. If not used, empty it and also the \def\subject.
+\def\avainsanat{tunkeutumisen tunnistusjärjestelmä, koneoppiminen, kyberturvallisuus}
+\def\aihe{Kehitys ja arviointi edullisen verkkotutkintajärjestelmän toteuttamiseksi pahantahtoisen verkkoliikenteen havaitsemiseksi.}
 
-%English section, for title/abstract
-\title{Your title here}
-\def\metropoliadegree{Bachelor of Engineering} % change to your needs, e.g. "master", etc.
-\def\metropoliadegreeprogramme{your degree programme (e.g. Information Technology)}
-\def\metropoliaspecialisation{your major option (e.g. Mobile Solutions)}
-\def\thesisen{Bachelor’s Thesis} % change to your need, e.g. master's
+\title{Implementation of a forensic analysis system for malicious network traffic}
+\def\metropoliadegree{Bachelor of Engineering}
+\def\metropoliadegreeprogramme{Information and Communication Technology}
+\def\metropoliaspecialisation{IoT and Cloud Computing}
+\def\thesisen{Bachelor’s Thesis}
 \def\metropoliainstructors{
-First name Last name, Title (e.g.: Project Manager)\newline
-First name Last name, Title (e.g.: Principal Lecturer)
+Janne Salonen, Head of School (ICT)
 }
 \def\abstract{
-Abstract content. To force newline between paragraph in the abstract, you must have both a empty line and the newline command. \newline
+    The objective of this thesis was to develop and evaluate a forensic system for detecting malicious network traffic, focusing on its practical implementation and effectiveness as a low-cost security solution. To support this goal, only open and freely available tools were used. \newline
 
-beginning of second paragraph\ldots
+    The main solution used in the thesis project was the creation of machine learning models to detect malicious network traffic. These models were created from K-nearest Neighbors, Logistic Regression, Random Forest, and Multi-Layer Perceptron algorithms. The dataset used in the training of the models was the CICIDS2017 dataset. As a final evaluation step, traffic captured in a virtual LAN was used the assess the models. \newline
+
+    The performance and predictions of the models indicated that they could be used effectively in a network forensic system for identifying cyberattacks.
+    The thesis showed that such an implemented system was profoundly reliant on the availability of open datasets, hence the cost in terms of effort seems to be justified if quality and open datasets are available and used.
+
 }
-\def\metropoliakeywords{keyword, keyword}
-\def\subject{short description of the thesis. Max 255 characters.}%for the pdf metadata/properties. If not used, empty it and also the \def\aihe.
+\def\metropoliakeywords{network forensics, packets, intrusion detection, machine-learning, cybersecurity}
+\def\subject{Development and evaluation of a low-cost forensic system for detecting malicious network traffic}

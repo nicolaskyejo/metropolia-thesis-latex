@@ -1,0 +1,137 @@
+\documentclass[11pt,a4paper,oneside]{article}
+\title{Implementation of a Forensic Analysis System for Malicious Network Traffic\\Thesis Plan}
+\author{Nicolas Kyejo}
+
+%packages%
+
+\usepackage{luacode}
+\usepackage[numbers,square]{natbib}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}        %for links
+\hypersetup{colorlinks,breaklinks,
+    urlcolor=[RGB]{0,0,0},
+    linkcolor=[RGB]{0,0,0},
+    citecolor=[RGB]{0,0,0}
+}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{float}
+\setmainfont{Arial}
+
+
+\linespread{1.5} %line spacing
+
+\makeatletter
+\renewcommand{\@dotsep}{10000}
+\makeatother
+
+
+%margins
+\usepackage[top=2.5cm, bottom=3cm, left=4cm, right=2cm, nofoot]{geometry}
+\setlength{\parindent}{0pt} %first line of paragraph not indented
+\setlength{\parskip}{16.5pt} %one empty line to separate paragraph
+
+\usepackage{fancyhdr}     %package for fancy header and footers
+\usepackage{lastpage}     %records the last page number
+\pagestyle{fancy}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{wallpaper}
+
+% your new footer definitions here  
+\cfoot{}
+\lfoot{}
+\rhead{\thepage\ (\pageref{LastPage})}
+
+\makeatletter
+\renewcommand\@biblabel[1]{#1\hspace{1cm}} %from [1] to 1 with 1cm gap
+\makeatother
+
+\begin{luacode}
+function metropoliadate()
+    local today = os.date("!\%d \%B \%Y")
+    tex.sprint(today)    
+end
+\end{luacode}
+
+\begin{document}
+
+    \makeatletter
+    \renewcommand{\maketitle}{
+        \newgeometry{left=4.5cm}
+        \thispagestyle{empty}
+        \ThisCenterWallPaper{1}{old_cover}
+        \vspace*{9.5cm}
+        {\Large\@author\\[1cm]\LARGE{\color[RGB]{0,0,0}\@title}}
+        \null\vfill
+        \parbox{.7\linewidth}{
+            Metropolia University of Applied Sciences\\
+            Bachelor of Engineering\\
+            Information Technology\\
+            \directlua{metropoliadate()} % i.e 20 January 2020
+        }
+
+        \ThisLRCornerWallPaper{1}{old_metropolia}
+        \restoregeometry
+        \clearpage
+    }
+    \makeatother
+
+    \maketitle
+    \newpage
+
+    % Uncomment the following lines if you want to include a table of contents
+    \thispagestyle{empty}
+    \ThisLRCornerWallPaper{1}{old_footer}
+    \tableofcontents
+    \clearpage
+    \newpage
+    \setcounter{page}{1}
+
+    \section{Introduction}\label{sec:introduction}
+
+    The aim of this document is outline a plan for conducting the work of the bachelor thesis \textit{``Implementation of a Forensic Analysis System for Malicious Network Traffic''}.
+    The specialization of the degree program is \textit{``IoT and Cloud computing''}.
+    The goal of the thesis is to explore existing solutions for performing forensic analysis on captured network traffic data,
+    and also implement a similar system to evaluate its effectiveness and whether it could be useful as a low cost solution.
+
+    \section{Approach}\label{sec:approach}
+    The planned approach to achieve the thesis project's goal is to do the following:
+    \begin{itemize}
+    \item Finish writing the thesis plan (phase 1 i.e.\ this document)
+    \item Start writing the thesis \textit{`Introduction`} and \textit{`Theoretical Background`} chapters (Start of phase 2)
+    \item Create a test LAN environment using a type 2 hypervisor with Virtualbox.
+    Also, create a config for such an environment using Vagrant (for ease of reproducing the environment or changing it)
+    \item In such a network have at least one node as a server, one as a client that produces malicious/non-malicious traffic, and one node to act as a traffic sniffer
+    \item The traffic is captured using already existing tools such as Wireshark, tcpdump and/or other tools
+    \item Create a system for analyzing the captured traffic and output a score indicating in relative terms how safe/unsafe the traffic is suspected to be.
+    The captured traffic can be analyzed on the host machine or anywhere else
+    \item Fine-tune the system and improve it;
+    repeat if applicable
+    \item If the system is sufficient for the project, start analyzing the results.
+    Also, inform the thesis supervisor about phase 2 completion (Execution completed)
+    \item Start writing \textit{`Implementation`} and \textit{`Results`} chapters
+    \item Start writing `Summary and Conclusions` chapter
+    \item Start writing `Abstract`
+    \item Inform the thesis supervisor about phase 3 start (Thesis ready for evaluation)
+    \item Enroll to maturity test regarding thesis
+    \item Submit thesis for language revision after thesis advisor approval
+    \end{itemize}
+
+    \section{Task Estimates}\label{sec:tasks}
+    The tasks mentioned in \autoref{sec:approach} are divided into three main phases with the following estimated completion dates:
+    \renewcommand{\theenumi}{\roman{enumi}}%
+    \begin{enumerate}
+    \item \textbf{Phase 1}: Planning 2022-11-01 -- 2022-11-04
+    \item Collect reference materials 2022-11-16 -- 2022-11-30
+    \item \textbf{Phase 2}: Execution 2022-12-01 -- 2023-04-01
+    \item Finish remaining chapters 2023-04-02 -- 2023-04-15
+    \item \textbf{Phase 3}: Thesis Evaluation 2023-04-16 -- 2023-05-16
+    \item Post-evaluation phase 2023-05-17 -- 2023-05-31
+    \end{enumerate}
+\end{document}

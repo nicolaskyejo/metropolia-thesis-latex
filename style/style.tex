@@ -46,7 +46,7 @@
 %insert source code
 %require -8bit -shell-escape in the xelatex compile command
 %if compiling locally, consider options cachedir=minted,outputdir=~/.tex
-\usepackage[newfloat]{minted}
+\usepackage[newfloat,outputdir=out/]{minted}
 \setminted{tabsize=2,linenos,breaklines,breaksymbolleft={\quad},baselinestretch=1}
 \setmintedinline{breaklines,breakanywhere}
 \usepackage[singlelinecheck=false]{caption}
@@ -93,7 +93,8 @@
 %NORMAL TEXT
 %all text, title, etc. in the same font: Arial
 %NOTE: fontname is case-sensitive
-\setmainfont[Scale=0.98]{Liberation Sans}
+%\setmainfont[Scale=0.98]{Liberation Sans}
+\setmainfont[Scale=0.98]{Arial}
 %line space
 \linespread{1.46}
 \AtBeginEnvironment{tabular}{\singlespacing}
@@ -110,6 +111,7 @@
 %IMAGE - FIGURE
 %the figures should be placed in the "illustration" folder
 \graphicspath{{illustration/}}
+\usepackage{svg}
 %figure number without chapter (1.1, 1.2, 2.1) to (1, 2, 3)
 \counterwithout{figure}{chapter}
 %border around images
@@ -184,7 +186,6 @@
     {\vspace{8pt}\endlist}
 
 %BIBLIOGRAPHY
-%TODO: toggle for Harward v.s. Vancouver
 \usepackage[
 backend=biber,
 bibencoding=utf8,%
@@ -202,6 +203,12 @@ terseinits=false,%
 giveninits=false,%
 maxbibnames=99,%
 ]{biblatex}
+
+% I needed to format the date in the bibliography
+\renewbibmacro*{urldate}{
+    \printtext{Accessed on}
+    \DTMdisplaydate{\thefield{urlyear}}{\thefield{urlmonth}}{\thefield{urlday}}{-1}
+}
 
 \setlength{\bibitemsep}{11pt}
 \setlength{\biblabelsep}{1cm}%with 1cm horizontal gap

@@ -1,0 +1,45 @@
+\clearpage%if the chapter heading starts close to bottom of the page, force a line break and remove the vertical vspace
+\vspace{21.5pt}
+
+
+\chapter{Conclusion}\label{ch:conclusions}
+
+The primary goals of this thesis were to detect malicious network traffic,
+investigate the practical implementation of a forensic system for this purpose,
+and evaluate its effectiveness as a low-cost security solution.
+Through the application of supervised machine learning methods,
+it was demonstrated that it is possible to detect malicious traffic in a reliable way.
+
+Regarding the practical implementation process, it was heavily reliant on the availability of open datasets.
+Without available open datasets, the process would have been arduous.
+The training process itself was fairly straight-forward with most time spent on tuning \gls{hyper-param}.
+Therefore, the goal of practical implementation is indeed realistic to achieve when quality datasets are obtainable.
+
+As to the effectiveness as a low-cost security solution,
+it depends on the resources available to an individual or an organization.
+For entities with considerable capital and resources,
+it can be feasible to allocate some of those resources to train such network forensic models
+and even create datasets that are used for that purpose.
+However, in a market economy it can be seen as a waste of resources to do so,
+therefore, it is more probable that a few organizations or companies sell their own solutions to others.
+Nevertheless, it can be assumed that organizations with high-security profiles, for example,
+government agencies and military facilities are creating
+and using their own network forensic solutions which are considered as a low-cost security solution to them.
+
+While this thesis has achieved its main goal, it is important to recognize some limitations as well.
+One weakness is the limited the number of attack type scenarios that were examined,
+both in the actual dataset and the ones generated for the final evaluation;
+more attack data would have raised the confidence of the final results.
+Another limitation is
+that the trained models were not tested in a real-world network which could have brought interesting observations.
+
+In closing,
+one area of further research recommended is the development of open datasets
+that can be used to create network forensic solutions.
+Most of the current available datasets rely
+on creating malicious traffic in a virtualized environment and labelling them appropriately;
+this can be considered a cumbersome and time-consuming process.
+It could be feasible to crowdsource the creation of such datasets with multiple organizations
+contributing their traffic captures and logs.
+The inherent privacy issues of such an approach could be alleviated with some form of anonymization techniques,
+perhaps again with the help of machine learning methods.
